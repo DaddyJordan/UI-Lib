@@ -34,6 +34,7 @@ local bgCorner = Instance.new("UICorner")
 bgCorner.CornerRadius = UDim.new(0, 16)
 bgCorner.Parent = BG
 
+-- Draggable functionality
 local function makeDraggable(topbar, object)
     local dragging
     local dragInput
@@ -74,10 +75,11 @@ end
 
 makeDraggable(BG, BG)
 
--- Tabs management
+-- Tab management system
 local tabs = {}
 local selectedTab = nil
 
+-- Adds a tab with the given name
 function addTab(name)
     local tabButton = Instance.new("TextButton", BG)
     tabButton.Text = name
@@ -115,7 +117,26 @@ function addTab(name)
     end
 end
 
--- Example adding tabs
-addTab("Home")
+-- Example tabs
 addTab("Settings")
+addTab("Stats")
+addTab("Credits")
 addTab("About")
+
+-- Further UI Elements within the tabs
+local function createLabel(parent, text)
+    local label = Instance.new("TextLabel")
+    label.Size = UDim2.new(0, 200, 0, 50)
+    label.Position = UDim2.new(0, 10, 0, 10)
+    label.TextColor3 = Color3.fromRGB(255, 255, 255)
+    label.Text = text
+    label.BackgroundTransparency = 1
+    label.Parent = parent
+end
+
+createLabel(tabs["Settings"].content, "Settings Panel")
+createLabel(tabs["Stats"].content, "Statistics Panel")
+createLabel(tabs["Credits"].content, "Credits Panel")
+createLabel(tabs["About"].content, "About Panel")
+
+-- You can continue adding more complex UI elements and logic as required.
